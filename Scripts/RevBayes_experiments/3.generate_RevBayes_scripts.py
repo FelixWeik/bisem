@@ -2,7 +2,7 @@ import os
 import numpy as np
 import phyloRNN as pn
 from matplotlib import pyplot as plt
-wd = "path_to_trained_model"
+wd = "Scripts/Trained_models/t20_s100"
 data_wd = "Chr1.WGAlign.FromBam.Filtered.fasta"
 model_name = "t20_s100_model"
 
