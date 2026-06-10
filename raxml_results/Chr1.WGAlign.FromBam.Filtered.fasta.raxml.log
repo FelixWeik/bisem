@@ -1,0 +1,137 @@
+
+RAxML-NG v. 2.0.2 released on 29.05.2026 by The Exelixis Lab.
+Developed by: Oleksiy M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth,
+              Julia Haag, Anastasis Togkousidis, Julius Wiegert, Christoph Stelz.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: 11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz, 4 cores, 15 GB RAM
+
+RAxML-NG was called at 09-Jun-2026 07:56:01 as follows:
+
+./raxml-ng --msa /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta --model DNA
+
+Analysis options:
+  run mode: Model selection + ML tree search (adaptive)
+  start tree(s): adaptive
+  random seed: 1780984561
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  logLH epsilon: general: 10.000000, brlen-triplet: 1000.000000
+  stopping rule: OFF
+  fast spr radius: AUTO
+  spr subtree cutoff: 1.000000
+  fast CLV updates: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  FreeRate optimization method: AUTO
+  model selection information criterion: BIC
+  model selection heuristics: RHAS(ic-delta=10.000000, mode=all significant) FreeRate 
+  model selection RHAS: R I+R E I G I+G  (FreeRate categories: 2-10)
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+[00:00:00] Reading alignment from file: /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta
+[00:00:02] Loaded alignment with 28 taxa and 26294222 sites
+
+Alignment comprises 1 partitions and 64555 patterns
+
+Partition 0: noname
+Model: GTR+FO+G4m
+Alignment sites / patterns: 26294222 / 64555
+Gaps: 0.00 %
+Invariant sites: 92.20 %
+
+
+[00:00:10] Adaptive mode: Predicting difficulty of the MSA ...
+[00:00:10] Parallel parsimony: 24 trees with 4 threads
+[00:00:11] Predicted difficulty: 0.01
+
+NOTE: Binary MSA file created: /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta.raxml.rba
+
+[00:00:12] Generating 1 random starting tree(s) with 28 taxa
+[00:00:12] Generating 2 parsimony starting tree(s) with 28 taxa
+
+Starting model selection with parsimony starting tree using 4 threads
+
+[00:00:35] [  4T] Evaluated model (  1/484) GTR+FO+R2     LogLH = -54211814.496970  BIC = 108424705.340106
+[00:07:15] [  4T] Evaluated model (  2/484) GTR+FO+R3     LogLH = -54210046.608075  BIC = 108421203.732035
+[00:10:38] [  4T] Evaluated model (  3/484) GTR+FO+R4     LogLH = -54210001.214259  BIC = 108421147.114122
+[00:11:16] [  4T] Evaluated model (  4/484) GTR+FO+I+R2   LogLH = -54210012.490480  BIC = 108421118.411987
+[00:11:42] [  4T] Evaluated model (  5/484) GTR+FO+I+R3   LogLH = -54210012.740903  BIC = 108421153.082551
+[00:11:43] [  4T] Evaluated model (  6/483) GTR+FO        LogLH = -54567619.059707  BIC = 109136280.295860
+[00:11:44] [  4T] Evaluated model (  7/483) GTR+FO+I      LogLH = -54247257.085839  BIC = 108495573.432984
+[00:11:47] [  4T] Evaluated model (  8/483) GTR+FO+G4     LogLH = -54248208.735757  BIC = 108497476.732820
+[00:11:55] [  4T] Evaluated model (  9/483) GTR+FO+I+G4   LogLH = -54232581.552975  BIC = 108466239.452115
+[00:14:52] [  4T] Evaluated model ( 10/483) GTR+FO+R5     LogLH = -54209980.168662  BIC = 108421139.192649
+
+RAxML-NG v. 2.0.2 released on 29.05.2026 by The Exelixis Lab.
+Developed by: Oleksiy M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth,
+              Julia Haag, Anastasis Togkousidis, Julius Wiegert, Christoph Stelz.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: 11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz, 4 cores, 15 GB RAM
+
+RAxML-NG was called at 09-Jun-2026 08:13:05 as follows:
+
+./raxml-ng --check --msa /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1780985585
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+
+ERROR: Please specify an evolutionary model with --model switch
+
+
+RAxML-NG v. 2.0.2 released on 29.05.2026 by The Exelixis Lab.
+Developed by: Oleksiy M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth,
+              Julia Haag, Anastasis Togkousidis, Julius Wiegert, Christoph Stelz.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: 11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz, 4 cores, 15 GB RAM
+
+RAxML-NG was called at 09-Jun-2026 08:13:14 as follows:
+
+./raxml-ng --check --msa /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta --model GTR+G
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1780985594
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+[00:00:00] Reading alignment from file: /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta
+[00:00:01] Loaded alignment with 28 taxa and 26294222 sites
+
+Alignment comprises 1 partitions and 26294222 sites
+
+Partition 0: noname
+Model: GTR+FO+G4m
+Alignment sites: 26294222
+Gaps: 0.00 %
+Invariant sites: 92.20 %
+
+
+NOTE: Binary MSA file already exists: /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta.raxml.rba
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /home/felix/Documents/Seminar/data_and_scripts/Chr1.WGAlign.FromBam.Filtered.fasta.raxml.log
+
+Analysis started: 09-Jun-2026 08:13:14 / finished: 09-Jun-2026 08:13:29
+
+Elapsed time: 14.429 seconds
+

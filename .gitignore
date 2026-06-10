@@ -1,5 +1,5 @@
 venv/
 .DS_Store
-*.fasta*
+*.fasta
 *.csv
 Trained_models/

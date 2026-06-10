@@ -3,7 +3,7 @@ import numpy as np
 import phyloRNN as pn
 from matplotlib import pyplot as plt
 wd = "path_to_trained_model"
-data_wd = "path_to_testset_data"
+data_wd = "Chr1.WGAlign.FromBam.Filtered.fasta"
 model_name = "t20_s100_model"
 
 trained_model = pn.load_rnn_model(os.path.join(wd, model_name))
