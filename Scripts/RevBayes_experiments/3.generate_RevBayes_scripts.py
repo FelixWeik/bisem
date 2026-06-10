@@ -2,9 +2,9 @@ import os
 import numpy as np
 import phyloRNN as pn
 from matplotlib import pyplot as plt
-wd = "Scripts/Trained_models/t20_s100"
-data_wd = "Chr1.WGAlign.FromBam.Filtered.fasta"
-model_name = "t20_s100_model"
+wd = "Scripts/Trained_models/"
+data_wd = "results/phylornn_results"
+model_name = "t20_s100"
 
 trained_model = pn.load_rnn_model(os.path.join(wd, model_name))
 
@@ -61,10 +61,10 @@ for sim_i in range(start_sim, start_sim + n_sim):
 
 
     print("Running predictions...")
-    model_input = {'sequence_data': dict_inputs['sequence_data'].reshape((1,
-                                          dict_inputs['sequence_data'].shape[0],
-                                          dict_inputs['sequence_data'].shape[1]))
-                   }
+    model_input = {'sequence_data': dict_inputs['sequence_data'].numpy().reshape((1,
+                                      dict_inputs['sequence_data'].shape[0],
+                                      dict_inputs['sequence_data'].shape[1]))
+               }
     predictions = trained_model.predict(model_input)
 
     site_rates = predictions[0][0]

@@ -1,0 +1,126 @@
+
+
+### Read in sequence data for the gene
+data = readDiscreteCharacterData("./ali666.nex")
+
+# Get some useful variables from the data. We need these later on.
+num_taxa <- data.ntaxa()
+num_branches <- 2 * num_taxa - 3
+taxa <- data.taxa()
+num_char <- data.nchar()
+
+moves    = VectorMoves()
+monitors = VectorMonitors()
+
+
+######################
+# Substitution Model #
+######################
+
+# specify the stationary frequency parameters
+pi_prior <- v(1,1,1,1) 
+pi ~ dnDirichlet(pi_prior)
+moves.append( mvBetaSimplex(pi, weight=2.0) )
+moves.append( mvDirichletSimplex(pi, weight=1.0) )
+
+
+# specify the exchangeability rate parameters
+er_prior <- v(1,1,1,1,1,1)
+er ~ dnDirichlet(er_prior)
+moves.append( mvBetaSimplex(er, weight=3.0) )
+moves.append( mvDirichletSimplex(er, weight=1.5) )
+
+
+# create a deterministic variable for the rate matrix, GTR
+Q := fnGTR(er,pi) 
+
+
+#############################
+# Among Site Rate Variation #
+#############################
+
+
+# among site rate variation
+sr <- v(0.76680905, 0.772572,1.062215,0.77880514,0.74382305,0.7497558,1.0345151,1.0810374,1.0440584,0.83960474,1.8123478,0.77081895,0.72060865,0.7135125,0.7149585,0.7442346,1.1193938,1.1645453,0.78285396,0.75460327,1.0891253,1.0785695,0.79223436,1.0982901,1.4826083,0.74934644,0.95676947,0.7099081,0.6784172,0.9422161,0.6743712,0.62922996,0.6698233,0.6779578,0.709242,1.8428586,0.73344284,0.6729598,0.6995354,1.2811505,1.5431211,1.1335152,1.1466095,0.6997433,0.6751814,1.0542344,0.7433556,1.0252829,0.70330864,0.64374495,0.71614623,1.4353005,0.69961005,0.68289876,0.6648903,1.5836681,3.364933,2.7993267,1.6541815,1.4589585,0.7341483,1.0701216,0.70399964,1.3771783,0.61106575,0.635448,0.9413159,0.57781756,0.58825624,0.6341844,0.71324414,2.3413434,1.4083658,1.9245595,0.6728381,0.67065436,0.69258475,1.2599751,1.5155555,1.1787852,0.81221896,1.6573821,1.3557045,0.6760244,0.6601379,0.71150005,1.8548832,1.4113988,1.7731149,0.7034603,0.7028698,1.0669115,1.0948824,1.1370916,0.6715174,0.57262427,0.5088108,0.5421644,0.5114299,0.55728686)
+            
+
+##############
+# Tree model #
+##############
+
+# Prior distribution on the tree topology
+topology ~ dnUniformTopology(taxa)
+moves.append( mvNNI(topology, weight=num_taxa/2.0) )
+moves.append( mvSPR(topology, weight=num_taxa/10.0) )
+
+# Branch length prior
+for (i in 1:num_branches) {
+    bl[i] ~ dnExponential(16.0)
+    moves.append( mvScale(bl[i]) )
+}
+
+TL := sum(bl)
+
+psi := treeAssembly(topology, bl)
+
+
+
+
+###################
+# PhyloCTMC Model #
+###################
+
+
+###############################################
+# Create partitions
+###############################################
+idx = 1
+
+for (i in 1:int(num_char)) {
+    morpho_bystate[i] <- data                              
+    morpho_bystate[i].excludeAll()                
+    morpho_bystate[i].includeCharacter(i)                            
+
+    ######################
+    # Substitution Model #
+    ######################    
+
+    m_morph[idx] ~ dnPhyloCTMC( tree=psi,
+                                Q=Q,
+                                nSites=1,
+                                siteRates=v(sr[idx]),
+                                type="DNA")           
+
+    m_morph[idx].clamp(morpho_bystate[i])                 
+
+    idx = idx + 1                                       
+    # idx
+}
+        
+
+
+############
+# Analysis #
+############
+
+mymodel = model(psi)
+
+# add monitors
+monitors.append( mnScreen(TL, printgen=100) )
+monitors.append( mnFile(psi, filename="./ali666.nex_DL.trees", printgen=10) )
+monitors.append( mnModel(filename="./ali666.nex_DL.log", printgen=10) )
+
+# run the analysis
+mymcmc = mcmc(mymodel, moves, monitors)
+mymcmc.run(generations=10000)
+
+
+# summarize output
+treetrace = readTreeTrace("./ali666.nex_DL.trees", treetype="non-clock")
+# and then get the MAP tree
+map_tree = mapTree(treetrace,"./ali666.nex_DL_MAP.tre", ccp=TRUE)
+mcc_tree = mccTree(treetrace,"./ali666.nex_DL_MCC.tre")
+mcr_tree = consensusTree(trace=treetrace, cutoff=0, file="./ali666.nex_DL_CT.tre")
+q()
+
+    
