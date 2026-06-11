@@ -18,7 +18,7 @@ import seaborn as sns
 import pingouin as pg
 
 
-data_wd = "path_to_clownfish_data"
+data_wd = "."
 ali_file = "Chr1.WGAlign.FromBam.Filtered.fasta"
 annotation_file = "Chr1.ExonAnnotation.Filtered.txt"
 

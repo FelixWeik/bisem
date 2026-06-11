@@ -12,9 +12,9 @@ import seaborn as sns
 
 t1 = time.time()
 
-model_wd = "path_to_trained_model"
+model_wd = "Scripts/Trained_models"
 model_name = "t28_s1000"
-data_wd = "path_to_clownfish_data"
+data_wd = "."
 ali_file = "Chr1.WGAlign.FromBam.Filtered.fasta"
 annotation_file = "Chr1.ExonAnnotation.Filtered.txt"
 
@@ -25,8 +25,8 @@ n_taxa = 28
 # parse alignment file
 ali_input = pn.parse_large_alignment_file(os.path.join(data_wd, ali_file),
                                           batch_size=model_output_size, 
-                                          n_taxa=n_taxa) 
-                                          # truncate=10000) # subset data for quicker run
+                                          n_taxa=n_taxa,
+                                          truncate=10000) # subset data for quicker run
 
 
 np.savez_compressed(
