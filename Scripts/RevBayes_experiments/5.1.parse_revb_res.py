@@ -7,8 +7,8 @@ import dendropy
 import pandas as pd
 
 
-data_dir = "path_to_revbayes_output"
-output_dir = "path_to_summary_file"
+data_dir = "results/phylornn_results"
+output_dir = "results/phylornn_results/5.1"
 n_sim = 200
 burnin = 800
 
@@ -17,9 +17,9 @@ res_list = []
 for sim_i in range(n_sim):
     ali_name = os.path.join(data_dir, "ali%s" % sim_i)
 
-    pkl_f = "%s_info.pkl" % ali_name
-    log_G_f = "%s_G.log" % ali_name
-    log_DL_f = "%s_DL.log" % ali_name
+    pkl_f = "%s.nex_info.pkl" % ali_name
+    log_G_f = "%s.nex_G.log" % ali_name
+    log_DL_f = "%s.nex_DL.log" % ali_name
 
     sim_data = pn.load_pkl(pkl_f)
 
